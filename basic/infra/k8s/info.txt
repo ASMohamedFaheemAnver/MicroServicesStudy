@@ -1,0 +1,12 @@
+# Since minikube running on VM, it can't recognize local docker build images
+# Therefor we have to build it within minikube context
+
+# minikube docker-env
+# To point your shell to minikube's docker-daemon, run:
+# eval $(minikube -p minikube docker-env).
+
+# How to use local docker images with Minikube?
+# https://stackoverflow.com/questions/42564058/how-to-use-local-docker-images-with-minikube
+
+# Node : (For me) Running with sudo bypassing the minikube context.
+
