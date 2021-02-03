@@ -1,32 +1,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: posts-depl
+  name: event-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: posts
+      app: event
   template:
     metadata:
       labels:
-        app: posts
+        app: event
     spec:
       containers:
-        - name: posts
-          image: codersauthority/posts:latest
+        - name: event
+          image: codersauthority/event:latest
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: posts-srvi
+  name: event-srv
 spec:
   selector:
-    app: posts
+    app: event
   # by default it's cluster ip
   type: ClusterIP
   ports:
-    - name: posts
+    - name: event
       protocol: TCP
-      port: 4000
-      targetPort: 4000
+      port: 4005
+      targetPort: 4005

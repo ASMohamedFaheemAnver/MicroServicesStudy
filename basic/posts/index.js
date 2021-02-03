@@ -21,7 +21,7 @@ app.post("/posts", async (req, res) => {
   posts[id] = { id, title };
 
   // notifying all services by emitting it into message broker
-  await axios.post("http://localhost:4005/events", { type: "PostCreated", data: { id, title } });
+  await axios.post("http://event-srv:4005/events", { type: "PostCreated", data: { id, title } });
 
   res.status(201).send(posts[id]);
 });
@@ -32,5 +32,5 @@ app.post("/events", (req, res) => {
 });
 
 app.listen(4000, () => {
-  console.log("server(posts) is listenning on port : 4000!");
+  console.log("docker server(posts) is listenning on port : 4000!");
 });
