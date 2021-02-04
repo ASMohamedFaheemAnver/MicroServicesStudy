@@ -1,0 +1,44 @@
+# apiVersion: networking.k8s.io/v1beta1
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-srv
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/use-regex: "true"
+spec:
+  rules:
+    - host: posts.com
+      http:
+        paths:
+          - path: /posts/create
+            pathType: Exact
+            backend:
+              service:
+                name: posts-srvi
+                port:
+                  number: 4000
+          - path: /posts/?(.*)/comments
+            pathType: Exact
+            backend:
+              service:
+                name: comments-srv
+                port:
+                  number: 4001
+          - path: /posts/get
+            pathType: Exact
+            backend:
+              # serviceName: posts-srvi
+              # servicePort: 4000
+              service:
+                name: query-srv
+                port:
+                  number: 4002
+          - path: /?(.*)
+            pathType: Exact
+            backend:
+              service:
+                name: client-srv
+                port:
+                  number: 3000
+# https://stackoverflow.com/questions/63773116/how-to-convert-all-kubernetes-ingress-yamls-to-use-api-version-networking-k8s-io
