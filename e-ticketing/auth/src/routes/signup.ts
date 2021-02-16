@@ -22,7 +22,7 @@ router.post(
     }
 
     const { email, password } = req.body;
-    throw new Error();
+    throw new DatabaseConnectionError();
     res.json({ msg: "/api/users/signup" });
   }
 );
