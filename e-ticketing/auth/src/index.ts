@@ -1,12 +1,13 @@
 import express from "express";
 import { json } from "body-parser";
 import "express-async-errors";
+import mongoose from "mongoose";
 
 import { currentUserRouter } from "./routes/current-user";
 import { signinRouter } from "./routes/signin";
 import { signoutRouter } from "./routes/signout";
 import { signupRouter } from "./routes/signup";
-import { errorHandler } from "./middleware/error-handler";
+import { errorHandler } from "./middlewares/error-handler";
 import { NotFountError } from "./errors/not-found-error";
 
 const app = express();
@@ -21,6 +22,19 @@ app.use(async (req, res, next) => {
 });
 app.use(errorHandler);
 
-app.listen(3000, () => {
-  console.log("server listening on port 3000!");
-});
+const start = async () => {
+  try {
+    await mongoose.connect("mongodb://auth-mongo-srv:27017/auth", {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+    });
+    app.listen(3000, () => {
+      console.log("server listening on port 3000!");
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+start();
