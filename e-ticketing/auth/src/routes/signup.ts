@@ -36,8 +36,9 @@ router.post(
 
     const userJwt = jwt.sign(
       { _id: user._id, email: user.email },
-      "i_use_freedom_to_secure"
+      process.env.JWT_KEY!
     );
+
     req.session = { jwt: userJwt };
     res.status(201).json({ msg: "user was created", user: user });
   }
