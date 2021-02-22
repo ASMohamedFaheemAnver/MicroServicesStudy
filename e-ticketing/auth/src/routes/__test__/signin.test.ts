@@ -39,5 +39,5 @@ it("response with cookie when given valid credentials", async () => {
       password: "password",
     })
     .expect(200);
-  return expect(response.get("set-cookie")).toBeDefined();
+  return expect(response.get("Set-Cookie")).toBeDefined();
 });
