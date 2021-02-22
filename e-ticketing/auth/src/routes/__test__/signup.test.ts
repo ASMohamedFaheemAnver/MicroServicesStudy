@@ -61,5 +61,5 @@ it("sets a cookie after successful signup", async () => {
       password: "password",
     })
     .expect(201);
-  expect(response.get("set-cookie")).toBeDefined();
+  return expect(response.get("set-cookie")).toBeDefined();
 });

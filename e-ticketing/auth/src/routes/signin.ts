@@ -42,7 +42,7 @@ router.post(
       process.env.JWT_KEY!
     );
     req.session = { jwt: userJwt };
-    res.status(201).json({ msg: "user authenticated", user: existingUser });
+    res.status(200).json({ msg: "user authenticated", user: existingUser });
   }
 );
 
