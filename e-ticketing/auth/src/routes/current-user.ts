@@ -1,18 +1,12 @@
 import express from "express";
-import jwt from "jsonwebtoken";
+
+import { currentUser } from "../middlewares/current-user";
+import { requireAuth } from "../middlewares/require-auth";
 
 const router = express.Router();
 
-router.get("/api/users/current-user", (req, res) => {
-  if (!req.session?.jwt) {
-    return res.json({ message: "invalid token" });
-  }
-  try {
-    const payload = jwt.verify(req.session.jwt, process.env.JWT_KEY!);
-    res.send({ message: "valid token", currentUser: payload });
-  } catch (err) {
-    return res.json({ message: "invalid token" });
-  }
+router.get("/api/users/current-user", currentUser, requireAuth, (req, res) => {
+  res.send({ currentUser: req.currentUser || null });
 });
 
 export { router as currentUserRouter };
