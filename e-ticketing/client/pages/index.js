@@ -1,7 +1,7 @@
 import buildClient from "../api/build-client";
+import AppComponent from "./_app";
 
-const Index = ({ currentUser }) => {
-  console.log(currentUser);
+const IndexComponent = ({ currentUser }) => {
   return currentUser ? (
     <h1>you are logged in</h1>
   ) : (
@@ -9,7 +9,7 @@ const Index = ({ currentUser }) => {
   );
 };
 
-Index.getInitialProps = async (context) => {
+IndexComponent.getInitialProps = async (context) => {
   // server will send the requests
   // we have to use ingress to route our request to a targeted pod
   // http://service.namespace.svc.cluster.local
@@ -38,4 +38,4 @@ Index.getInitialProps = async (context) => {
   return res.data;
 };
 
-export default Index;
+export default IndexComponent;
