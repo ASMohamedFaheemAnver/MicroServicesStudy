@@ -1,0 +1,6 @@
+# unpublishing a npm module
+npm unpublish "@coders2authority/tk-common" --force
+
+# publishing a npm module
+npm login
+npm publish --access public
