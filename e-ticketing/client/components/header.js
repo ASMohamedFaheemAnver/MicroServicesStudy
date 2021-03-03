@@ -11,9 +11,9 @@ const HeaderComponent = ({ currentUser }) => {
     })
     .map(({ label, href }) => {
       return (
-        <li key={href}>
+        <li key={href} className="nav-item">
           <Link href={href}>
-            <a className="navbar-link">{label}</a>
+            <a className="nav-link">{label}</a>
           </Link>
         </li>
       );
