@@ -14,13 +14,16 @@ spec:
     spec:
       containers:
         - name: auth
-          image: codersauthority/auth
+          image: us.gcr.io/planar-sun-259909/auth
           env:
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
                   name: jwt-secret
                   key: JWT_KEY
+            - name: MONGO_URI
+              # not an issue
+              value: "mongodb://auth-mongo-srv:27017/auth"
 ---
 apiVersion: v1
 kind: Service
