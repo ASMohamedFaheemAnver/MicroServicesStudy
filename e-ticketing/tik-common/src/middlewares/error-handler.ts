@@ -12,7 +12,8 @@ export const errorHandler = (
     errors = err.serializeErrors();
     statusCode = err.statusCode;
   } else {
+    console.error(err);
     errors = [{ message: "something went wrong" }];
   }
-  res.status(statusCode).json({ errors });
+  return res.status(statusCode).json({ errors });
 };
