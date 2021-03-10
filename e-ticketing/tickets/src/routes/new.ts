@@ -1,7 +1,7 @@
 import { requireAuth, validateRequest } from "@coders2authority/tik-common";
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { Ticket } from "../model/tickets";
+import { Ticket } from "../model/ticket";
 
 const router = express.Router();
 

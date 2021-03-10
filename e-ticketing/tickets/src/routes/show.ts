@@ -1,7 +1,7 @@
 import { NotFountError } from "@coders2authority/tik-common";
 import express, { Request, Response } from "express";
 
-import { Ticket } from "../model/tickets";
+import { Ticket } from "../model/ticket";
 
 const router = express.Router();
 
