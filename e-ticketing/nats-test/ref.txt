@@ -1,2 +1,2 @@
 # port forward
-kubectl port-forward nats-depl-78f5448ff8-cpf95 4222:4222
+kubectl port-forward nats-depl-f7cdf5dd-jc44q 4222:4222
