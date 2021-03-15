@@ -4,3 +4,8 @@ npm unpublish "@coders2authority/tk-common" --force
 # publishing a npm module
 npm login
 npm publish --access public
+
+# you can switch from local (minikube) to gcloud and back with
+kubectl config use-context CONTEXT_NAME
+# to list all contexts
+kubectl config get-contexts
