@@ -3,6 +3,8 @@ import request from "supertest";
 import { app } from "../../app";
 import { Ticket } from "../../model/ticket";
 
+import { natsWrapper } from "../../nats-wrapper";
+
 it("has a route handler to /api/tickets for post requests", async () => {
   const res = await request(app).post("/api/tickets").send({});
   expect(res.status).not.toEqual(404);
@@ -49,7 +51,7 @@ it("returns an error if an invalid price is provided", async () => {
   expect(res2.status).toEqual(400);
 });
 
-it("creates a ticket with vavlid inputs", async () => {
+it("creates a ticket with valid inputs", async () => {
   let tickets = await Ticket.find({});
   expect(tickets.length).toEqual(0);
 
@@ -61,4 +63,14 @@ it("creates a ticket with vavlid inputs", async () => {
 
   tickets = await Ticket.find({});
   expect(tickets.length).toEqual(1);
+});
+
+it("publishes an event", async () => {
+  await request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signin())
+    .send({ title: "title", price: 20 })
+    .expect(201);
+
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
 });
