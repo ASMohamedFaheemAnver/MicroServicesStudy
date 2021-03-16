@@ -29,6 +29,15 @@ spec:
               #   name: tickets-srv
               #   port:
               #     number: 3000
+          - path: /api/orders/?(.*)
+            backend:
+              # pathType: Exact
+              serviceName: orders-srv
+              servicePort: 3000
+              # service:
+              #   name: orders-srv
+              #   port:
+              #     number: 3000
           - path: /?(.*)
             # pathType: Exact
             backend:
