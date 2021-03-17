@@ -1,4 +1,8 @@
-import { NotFountError, requireAuth } from "@coders2authority/tik-common";
+import {
+  NotAuthorizedError,
+  NotFountError,
+  requireAuth,
+} from "@coders2authority/tik-common";
 import express, { Request, Response } from "express";
 import { Order } from "../models/order";
 
@@ -12,6 +16,10 @@ router.get(
 
     if (!order) {
       throw new NotFountError();
+    }
+
+    if (order.userId !== req.currentUser!.id) {
+      throw new NotAuthorizedError();
     }
 
     res.send(order);
