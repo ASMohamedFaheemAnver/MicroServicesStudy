@@ -28,7 +28,7 @@ app.use(indexTicketRouter);
 app.use(updateTicketRouter);
 
 app.use(async (req, res, next) => {
-  throw new NotFountError();
+  throw new NotFountError("route not found");
 });
 app.use(errorHandler);
 

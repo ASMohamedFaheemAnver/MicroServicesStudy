@@ -27,7 +27,7 @@ app.use(newOrderRouter);
 app.use(showOrderRouter);
 
 app.use(async (req, res, next) => {
-  throw new NotFountError();
+  throw new NotFountError("route not found");
 });
 app.use(errorHandler);
 
