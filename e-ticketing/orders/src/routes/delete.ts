@@ -26,7 +26,7 @@ router.delete(
     order.status = OrderStatus.CANCELLED;
     await order.save();
 
-    res.send({});
+    res.sendStatus(204).send(order);
   }
 );
 
