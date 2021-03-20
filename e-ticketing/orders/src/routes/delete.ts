@@ -4,7 +4,9 @@ import {
   requireAuth,
 } from "@coders2authority/tik-common";
 import express, { Request, Response } from "express";
+import { OrderCancelledPublisher } from "../events/publishers/order-cancelled-publisher";
 import { Order, OrderStatus } from "../models/order";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -26,7 +28,14 @@ router.delete(
     order.status = OrderStatus.CANCELLED;
     await order.save();
 
-    res.sendStatus(204).send(order);
+    new OrderCancelledPublisher(natsWrapper.client).publish({
+      id: order.id,
+      ticket: {
+        id: order.ticket.id,
+      },
+    });
+
+    return res.status(204).send(order);
   }
 );
 
