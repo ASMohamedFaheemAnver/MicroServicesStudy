@@ -11,11 +11,11 @@ import { queueGroupName } from "./queue-group-name";
 export class TicketUpdatedListener extends Listener<TicketUpdatedEvent> {
   subject: Subjects.TICKER_UPDATED = Subjects.TICKER_UPDATED;
   queueGroupName: string = queueGroupName;
-  async onMessage(
-    data: { id: string; title: string; price: number; userId: string },
-    msg: Message
-  ) {
-    const ticket = await Ticket.findById(data.id);
+  async onMessage(data: TicketUpdatedEvent["data"], msg: Message) {
+    const ticket = await Ticket.findOne({
+      _id: data.id,
+      version: data.version - 1,
+    });
     if (!ticket) {
       throw new NotFountError("ticket not found");
     }
