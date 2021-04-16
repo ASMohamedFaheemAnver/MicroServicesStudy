@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: orders-depl
+  name: tickets-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: orders
+      app: tickets
   template:
     metadata:
       labels:
-        app: orders
+        app: tickets
     spec:
       containers:
-        - name: orders
-          image: codersauthority/orders
+        - name: tickets
+          image: us.gcr.io/planar-sun-259909/tickets
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -31,18 +31,18 @@ spec:
                   key: JWT_KEY
             - name: MONGO_URI
               # not an issue
-              value: "mongodb://orders-mongo-srv:27017/orders"
+              value: "mongodb://tickets-mongo-srv:27017/tickets"
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: orders-srv
+  name: tickets-srv
 spec:
   selector:
-    app: orders
+    app: tickets
   ports:
-    - name: orders
+    - name: tickets
       protocol: TCP
       port: 3000
       targetPort: 3000

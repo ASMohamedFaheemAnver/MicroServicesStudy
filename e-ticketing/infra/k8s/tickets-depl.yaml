@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tickets
-          image: us.gcr.io/planar-sun-259909/tickets
+          image: codersauthority/tickets
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: orders
-          image: codersauthority/orders
+          image: us.gcr.io/planar-sun-259909/orders
           env:
             - name: NATS_CLIENT_ID
               valueFrom:

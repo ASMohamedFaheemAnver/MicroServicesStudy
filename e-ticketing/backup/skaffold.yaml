@@ -5,12 +5,12 @@ deploy:
     manifests:
       - ./infra/k8s/*
 build:
-  local:
-    push: false
-  # googleCloudBuild:
-  #   projectId: planar-sun-259909
+  # local:
+  #   push: false
+  googleCloudBuild:
+    projectId: planar-sun-259909
   artifacts:
-    - image: codersauthority/auth
+    - image: us.gcr.io/planar-sun-259909/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -18,7 +18,7 @@ build:
         manual:
           - src: "*.ts"
             dest: .
-    - image: codersauthority/tickets
+    - image: us.gcr.io/planar-sun-259909/tickets
       context: tickets
       docker:
         dockerfile: Dockerfile
@@ -26,7 +26,7 @@ build:
         manual:
           - src: "*.ts"
             dest: .
-    - image: codersauthority/orders
+    - image: us.gcr.io/planar-sun-259909/orders
       context: orders
       docker:
         dockerfile: Dockerfile
@@ -34,7 +34,7 @@ build:
         manual:
           - src: "*.ts"
             dest: .
-    - image: codersauthority/client
+    - image: us.gcr.io/planar-sun-259909/client
       context: client
       docker:
         dockerfile: Dockerfile

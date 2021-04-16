@@ -9,3 +9,9 @@ npm publish --access public
 kubectl config use-context CONTEXT_NAME
 # to list all contexts
 kubectl config get-contexts
+
+# ingress-nginx Errors connection refused
+# https://stackoverflow.com/questions/62162209/ingress-nginx-errors-connection-refused
+
+# Nginx Ingress Controller - Failed Calling Webhook
+# https://stackoverflow.com/questions/61616203/nginx-ingress-controller-failed-calling-webhook
