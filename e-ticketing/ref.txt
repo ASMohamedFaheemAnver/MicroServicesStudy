@@ -12,6 +12,7 @@ kubectl config get-contexts
 
 # ingress-nginx Errors connection refused
 # https://stackoverflow.com/questions/62162209/ingress-nginx-errors-connection-refused
+# https://stackoverflow.com/questions/64707777/error-getaddrinfo-enotfound-ingress-nginx-ingress-nginx-controller-svc-cluster
 
 # Nginx Ingress Controller - Failed Calling Webhook
 # https://stackoverflow.com/questions/61616203/nginx-ingress-controller-failed-calling-webhook
