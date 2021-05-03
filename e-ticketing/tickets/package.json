@@ -18,7 +18,7 @@
   "author": "A.S. Mohamed Faheem Anver",
   "license": "MIT",
   "dependencies": {
-    "@coders2authority/tik-common": "^1.0.22",
+    "@coders2authority/tik-common": "^1.0.23",
     "@types/cookie-session": "^2.0.42",
     "@types/express": "^4.17.11",
     "@types/jsonwebtoken": "^8.5.1",
