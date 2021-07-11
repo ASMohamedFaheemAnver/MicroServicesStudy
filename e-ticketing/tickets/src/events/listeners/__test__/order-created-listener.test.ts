@@ -1,12 +1,16 @@
 import mongoose from "mongoose";
-import { OrderCreatedEvent, OrderStatus } from "@coders2authority/tik-common";
+import {
+  OrderCreatedEvent,
+  OrderStatus,
+  TicketUpdatedEvent,
+} from "@coders2authority/tik-common";
 import { Message } from "node-nats-streaming";
 import { Ticket } from "../../../model/ticket";
 import { natsWrapper } from "../../../nats-wrapper";
 import { OrderCreatedListener } from "../order-created-listener";
 
 const setup = async () => {
-  const Listener = new OrderCreatedListener(natsWrapper.client);
+  const listener = new OrderCreatedListener(natsWrapper.client);
 
   const ticket = Ticket.build({
     title: "concert",
@@ -33,18 +37,28 @@ const setup = async () => {
     ack: jest.fn(),
   };
 
-  return { Listener, ticket, data, msg };
+  return { listener, ticket, data, msg };
 };
 
 it("sets the userId of the ticket", async () => {
-  const { Listener, ticket, data, msg } = await setup();
-  await Listener.onMessage(data, msg);
+  const { listener, ticket, data, msg } = await setup();
+  await listener.onMessage(data, msg);
   const updatedTicket = await Ticket.findById(ticket.id);
   expect(updatedTicket!.orderId).toEqual(data.id);
 });
 
 it("acks the message", async () => {
-  const { Listener, ticket, data, msg } = await setup();
-  await Listener.onMessage(data, msg);
+  const { listener, ticket, data, msg } = await setup();
+  await listener.onMessage(data, msg);
   expect(msg.ack).toHaveBeenCalled();
+});
+
+it("publishes a ticket updated event", async () => {
+  const { listener, ticket, data, msg } = await setup();
+  await listener.onMessage(data, msg);
+  expect(natsWrapper.client.publish).toHaveBeenCalled();
+  const ticketUpdatedData: TicketUpdatedEvent["data"] = JSON.parse(
+    (natsWrapper.client.publish as jest.Mock).mock.calls[0][1]
+  );
+  expect(data.id).toEqual(ticketUpdatedData.orderId);
 });
