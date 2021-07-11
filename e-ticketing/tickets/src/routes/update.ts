@@ -1,4 +1,5 @@
 import {
+  BadRequestError,
   NotAuthorizedError,
   NotFountError,
   requireAuth,
@@ -29,6 +30,10 @@ router.put(
       throw new NotFountError();
     } else if (ticket.userId !== req.currentUser!.id) {
       throw new NotAuthorizedError();
+    }
+
+    if (ticket.orderId) {
+      throw new BadRequestError("Cannot edit a reserved ticket");
     }
 
     ticket.set({
