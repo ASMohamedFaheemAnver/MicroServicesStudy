@@ -18,7 +18,7 @@
   "author": "A.S. Mohamed Faheem Anver",
   "license": "MIT",
   "dependencies": {
-    "@coders2authority/tik-common": "^1.0.23",
+    "@coders2authority/tik-common": "^1.0.25",
     "@types/bull": "^3.15.2",
     "bull": "^3.22.11",
     "node-nats-streaming": "^0.3.2",
