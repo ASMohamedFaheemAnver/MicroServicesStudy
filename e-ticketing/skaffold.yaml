@@ -42,3 +42,11 @@ build:
         manual:
           - src: "*.js"
             dest: .
+    - image: codersauthority/expiration
+      context: expiration(worker)
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.js"
+            dest: .
