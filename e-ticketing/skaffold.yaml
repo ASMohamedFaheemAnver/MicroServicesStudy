@@ -50,3 +50,11 @@ build:
         manual:
           - src: "*.ts"
             dest: .
+    - image: codersauthority/payments
+      context: payments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "*.ts"
+            dest: .
