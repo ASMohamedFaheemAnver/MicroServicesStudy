@@ -18,3 +18,6 @@ kubectl config get-contexts
 # Nginx Ingress Controller - Failed Calling Webhook
 # https://stackoverflow.com/questions/61616203/nginx-ingress-controller-failed-calling-webhook
 # https://stackoverflow.com/questions/67212876/error-when-creating-stdin-internal-error-occurred-while-running-skaffold-dev
+
+# Create a global variable in TypeScript ?
+# https://stackoverflow.com/questions/38906359/create-a-global-variable-in-typescript

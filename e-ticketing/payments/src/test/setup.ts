@@ -6,11 +6,7 @@ import jwt from "jsonwebtoken";
 import { app } from "../app";
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      signin(): string[];
-    }
-  }
+  var signin: () => string[];
 }
 
 jest.mock("../nats-wrapper");
@@ -39,3 +35,24 @@ afterAll(async () => {
   await mongo.stop();
   await mongoose.disconnect();
 });
+
+globalThis.signin = () => {
+  // build a jwt payload {id, email}
+  const payload = {
+    id: new mongoose.Types.ObjectId().toHexString(),
+    email: "test@test.com",
+  };
+
+  // create the jwt
+  const token = jwt.sign(payload, process.env.JWT_KEY!);
+
+  // build session object {jwt: my_jwt}
+  const session = { jwt: token };
+  const sessionJSON = JSON.stringify(session);
+
+  // take json and encode it as base64
+  const base64 = Buffer.from(sessionJSON).toString("base64");
+
+  // return a string thats the cookie with the encoded data
+  return [`express:sess=${base64}`];
+};

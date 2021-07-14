@@ -20,6 +20,15 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
+          - path: /api/payments/?(.*)
+            pathType: Exact
+            backend:
+              # serviceName: payments-srv
+              # servicePort: 3000
+              service:
+                name: payments-srv
+                port:
+                  number: 3000
           - path: /api/tickets/?(.*)
             pathType: Exact
             backend:
