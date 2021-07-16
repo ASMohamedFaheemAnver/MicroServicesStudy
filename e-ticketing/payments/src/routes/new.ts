@@ -40,7 +40,7 @@ router.post(
       source: token,
     });
 
-    res.send({ status: true });
+    return res.status(201).send({ status: true });
   }
 );
 
