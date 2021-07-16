@@ -8,7 +8,10 @@ import {
 } from "@coders2authority/tik-common";
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
+import { PaymentCreatedPublisher } from "../events/publishers/payment-created-publishers";
 import { Order } from "../model/order";
+import { Payment } from "../model/payment";
+import { natsWrapper } from "../nats-wrapper";
 import { stripe } from "../stripe";
 
 const router = express.Router();
@@ -33,14 +36,27 @@ router.post(
       throw new BadRequestError("Cannot pay for a cancelled order");
     }
 
-    await stripe.charges.create({
+    const charge = await stripe.charges.create({
       description: order.status,
       currency: "usd",
       amount: order.price * 100,
       source: token,
     });
 
-    return res.status(201).send({ status: true });
+    const payment = Payment.build({
+      orderId,
+      stripeId: charge.id,
+    });
+
+    await payment.save();
+
+    new PaymentCreatedPublisher(natsWrapper.client).publish({
+      id: payment.id,
+      orderId: payment.orderId,
+      stripeId: payment.stripeId,
+    });
+
+    return res.status(201).send({ ...payment });
   }
 );
 
