@@ -1,0 +1,9 @@
+# Mongodb connect
+@nestjs/mongoose mongoose
+
+# Evn
+@nestjs/config
+
+# Validation
+joi
+@types/joi
