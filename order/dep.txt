@@ -7,3 +7,13 @@
 # Validation
 joi
 @types/joi
+
+# Class validation
+class-transformer
+class-validator
+
+# Service communication
+@nestjs/microservices
+
+# RabbitMQ connection
+amqplib amqp-connection-manager

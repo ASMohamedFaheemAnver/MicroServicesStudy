@@ -1,0 +1,11 @@
+# Instead of docker-compose we can use docker compose plugin
+sudo docker compose
+
+# Reset and run again
+sudo docker compose up --build -V
+
+# Basic mongodb setup
+-> https://hub.docker.com/_/mongo
+
+# Mongodb replication
+-> https://stackoverflow.com/questions/51461952/mongodb-v4-0-transaction-mongoerror-transaction-numbers-are-only-allowed-on-a

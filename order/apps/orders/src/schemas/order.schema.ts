@@ -3,13 +3,13 @@ import { AbstractDocument } from '@app/common';
 
 @Schema({ versionKey: false, timestamps: true })
 export class Order extends AbstractDocument {
-  @Prop()
+  @Prop({ required: true })
   name: string;
 
-  @Prop()
+  @Prop({ required: true })
   price: number;
 
-  @Prop()
+  @Prop({ required: true })
   phoneNumber: string;
 }
 

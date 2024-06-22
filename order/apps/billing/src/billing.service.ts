@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
+import { CreateOrderRequest } from 'apps/orders/src/dtos/create-order.request';
 
 @Injectable()
 export class BillingService {
-  getHello(): string {
-    return 'Hello World!';
+  private readonly logger = new Logger(BillingService.name);
+  bill(data: CreateOrderRequest) {
+    this.logger.log('Billing...', data);
   }
 }
