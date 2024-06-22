@@ -3,7 +3,7 @@ import { BillingController } from './billing.controller';
 import { BillingService } from './billing.service';
 import { ConfigModule } from '@nestjs/config';
 import * as Joi from 'joi';
-import { EnvKeys, QueueNames, RmqModule } from '@app/common';
+import { AuthModule, EnvKeys, QueueNames, RmqModule } from '@app/common';
 
 @Module({
   imports: [
@@ -16,6 +16,7 @@ import { EnvKeys, QueueNames, RmqModule } from '@app/common';
       }),
     }),
     RmqModule,
+    AuthModule,
   ],
   controllers: [BillingController],
   providers: [BillingService],

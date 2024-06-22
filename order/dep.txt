@@ -17,3 +17,10 @@ class-validator
 
 # RabbitMQ connection
 amqplib amqp-connection-manager
+
+# Auth
+@nestjs/jwt
+@nestjs/passport
+passport-jwt
+bcrypt
+cookie-parser

@@ -12,13 +12,14 @@ export class OrdersService {
     @Inject(QueueNames.BILLING) private billingClient: ClientProxy,
   ) {}
 
-  async createOrder(request: CreateOrderRequest) {
+  async createOrder(request: CreateOrderRequest, authentication: string) {
     const session = await this.ordersRepository.startTransaction();
     try {
       const order = await this.ordersRepository.create(request, { session });
       await lastValueFrom(
         this.billingClient.emit(QueueEvents.ORDER_CREATED, {
           request,
+          Authentication: authentication,
         }),
       );
       await session.commitTransaction();
